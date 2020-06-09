@@ -1,0 +1,126 @@
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tail.select@latest/css/bootstrap4/tail.select-default.css">
+  <link rel="stylesheet" href="maple_companion.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/1.24.1/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tail.select@latest/js/tail.select.js"></script>
+  
+  <script src="main.js"></script>
+</head>
+
+<div id="pageBody" class="row container-fluid height-100">
+  <div class="col-xl-2 col-lg-2 col-sm-12 pr-0 pl-0">
+    <div class="bg-secondary text-light py-1" data-toggle="collapse" data-target="#sideNav">
+      <div class="d-flex">
+        <span class="pl-3 flex-grow-1 align-self-center pointer">Menu</span>
+        <i class="oi oi-menu text-light align-self-center pr-2 pointer"></i>
+      </div>
+    </div>
+    <div id="sideNav" class="bg-light collapse show">
+      <ul class="list-group">
+        
+        <div id="newTask" class="list-group-item shadow-sm pointer">New Task</div>
+        <div id="delete" class="list-group-item shadow-sm pointer">Delete Task</div>
+        <label id="editMode" class="list-group-item mb-0 shadow-sm pointer" for="editModeSwitch">
+          Edit Mode
+          <input type="checkbox" class="d-none" id="editModeSwitch">
+        </label>
+        <div id="resetTasks" data-toggle="collapse" data-target="#dialogResetTasks" class="list-group-item shadow-sm pointer">
+          Reset Tasks
+        </div>
+        <div id="dialogResetTasks" class="px-4 py-2 collapse">
+          <p class="mr-auto ml-auto">Which type of tasks?</p>
+          <div id="resetTasksBtnGroup" class="btn-group-vertical mr-auto ml-auto">
+            <button value="hardBoss" type="button" class="btn btn-secondary">Hard Boss</button>
+            <button value="weekly" type="button" class="btn btn-secondary">Weekly</button>
+            <button value="daily" type="button" class="btn btn-secondary">Daily</button>
+          </div>
+        </div>
+        <div id="hideTasks" data-toggle="collapse" data-target="#dialogHideTasks" class="list-group-item shadow-sm pointer">
+          Hide Tasks
+        </div>
+        <div id="dialogHideTasks" class="px-4 py-2 collapse">
+          <p class="mr-auto ml-auto">Which type of tasks?</p>
+          <div id="hideTasksBtnGroup" class="btn-group-vertical mr-auto ml-auto">
+            <button value="hardBoss" type="button" class="btn btn-primary">Hard Boss</button>
+            <button value="weekly" type="button" class="btn btn-primary">Weekly</button>
+            <button value="daily" type="button" class="btn btn-primary">Daily</button>            
+          </div>
+        </div>
+        <a id="exportTasks" class="list-group-item mt-4 shadow-sm border-top exportTasks text-decoration-none text-dark" href="#" download="tasks.json">Export Tasks</a>        
+        <div id="importTasks" data-toggle="collapse" data-target="#dialogImportTasks" class="list-group-item shadow-sm pointer">
+          Import Tasks
+        </div>
+        <div id="dialogImportTasks" class="px-4 py-2 collapse">
+          <p>Paste below the content of the 'tasks.json' file to load up your saved tasks!</p>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputTasksJSON">
+            <label class="custom-file-label" for="inputTasksJSON">Choose file</label>
+          </div>
+        </div>
+        <div class="yeti d-flex list-group-item mt-4 shadow-sm">
+          <div class="col px-0 d-flex flex-column">
+            <small class="mt-auto">Cool website?</small>
+            <br>
+            <a class="mb-auto" target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZJH282NXDD7XA&source=url" id="donate">Help feed my Yeti</a>
+          </div>              
+          <img src="2d_yeti.svg" style="width: 2.5rem" class="">
+        </div>
+      </ul>
+    </div>
+  </div>
+  
+
+  <div id="content" class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+    <div class="row mt-2 mb-1 pb-2" id="clockRow">
+      <div class="col-xl-3 col-lg-4 col-sm-6 col-10" id="clockContainer">
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle timezone" type="button" data-toggle="dropdown"></button>
+            <div class="dropdown-menu">
+              <div class="timeOffsetContainer range-control">
+                <input class="timeOffset custom-range" type="range" id="volume" name="timeOffset" min="-12" max="13" value="0" data-thumbwidth="20">
+                <output name="timeOffset" style=""></output>
+              </div>
+            </div>
+          </div>
+          <input class="form-control mainClock"></input>
+        </div>
+      </div>
+    </div>
+    
+    <div id="tasks" class="table pl-3 mb-5 col-xl-12">
+
+      <div class="row bg-light border-bottom border-top pb-1">
+        <div class="col-xl-2 col-lg-1 col-sm-2 col-2">Done?</div>
+        <div class="col-xl-4 col-lg-4 col-sm-4 col-4">Name</div>
+        <div class="col-xl-4 col-lg-4 col-sm-4 col-4">Type</div>
+        <div class="col-xl-2 col-lg-3 col-sm-2 col-2 text-truncate">Remaining Time</div>
+      </div>
+      <ul class="p-0 sortable">
+        <li class="row example d-none taskRow grab">
+          <div class="col-xl-2 col-lg-1 col-sm-2 col-2 pt-1 pb-1 pl-2 done"></div>
+          <div class="col-xl-4 col-lg-4 col-sm-4 col-4 name">
+            <input class="form-control-plaintext w-100" type="text" placeholder="New Task" name="name" readonly></input>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-sm-4 col-4 pt-1 type">
+          </div>
+          <div class="col-xl-2 col-lg-3 col-sm-2 col-2 remTime">
+            <label class="form-control-plaintext text-secondary">88:88:88</label>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
